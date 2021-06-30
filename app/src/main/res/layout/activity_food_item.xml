@@ -6,4 +6,40 @@
     android:layout_height="match_parent"
     tools:context=".FoodItem">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="195dp"
+        tools:layout_editor_absoluteY="324dp">
+
+        <TextView
+            android:id="@+id/ask"
+            android:labelFor="@+id/servings"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="How many servings will you be having ?"
+            tools:ignore="MissingConstraints"
+            tools:layout_editor_absoluteX="176dp"
+            tools:layout_editor_absoluteY="74dp" />
+
+        <EditText
+            android:id="@+id/servings"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="number"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.497"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:layout_editor_absoluteY="137dp"
+            tools:ignore="MissingConstraints" />
+
+        <Button
+            android:id="@+id/submit"
+            android:text="Submit"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"/>
+    </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

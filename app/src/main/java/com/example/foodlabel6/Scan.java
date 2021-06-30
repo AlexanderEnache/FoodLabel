@@ -32,21 +32,24 @@ public class Scan extends AppCompatActivity {
 
         CodeScannerView scannerView = findViewById(R.id.scanner);
         mCodeScanner = new CodeScanner(this, scannerView);
-        mCodeScanner.setDecodeCallback(new DecodeCallback() {
+
+        Intent myIntent = new Intent(getApplicationContext(), FoodItem.class);
+        myIntent.putExtra("upc", "048500202760");
+        startActivity(myIntent);
+
+       /* mCodeScanner.setDecodeCallback(new DecodeCallback() {
             @Override
             public void onDecoded(@NonNull final Result result) {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-//                        Toast.makeText(Scan.this, result.getText(), Toast.LENGTH_SHORT).show();
-//                        System.out.println(result.getText());
                         Intent myIntent = new Intent(getApplicationContext(), FoodItem.class);
                         myIntent.putExtra("upc", result.getText());
                         startActivity(myIntent);
                     }
                 });
             }
-        });
+        });*/
         mCodeScanner.setErrorCallback(error -> runOnUiThread(
                 () -> Toast.makeText(this, "String", Toast.LENGTH_LONG).show()));
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
