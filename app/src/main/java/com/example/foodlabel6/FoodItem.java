@@ -67,9 +67,7 @@ public class FoodItem extends AppCompatActivity {
                         JSONObject wholeObject = new JSONObject(response.body().string());
                         JSONArray foods = wholeObject.getJSONArray("foods");
                         JSONObject foodsObj = foods.getJSONObject(0);
-//                        String upc = foodsObj.getString("food_name");
-                        String name = "Food";
-//                        int totalCalories = loadCalorieData();
+                        String name = foodsObj.getString("food_name");
                         int currentFoodCalories = Integer.parseInt(foodsObj.getString("nf_calories"));
                         int currentFoodSugar = Integer.parseInt(foodsObj.getString("nf_sugars"));
                         int currentFoodSodium = Integer.parseInt(foodsObj.getString("nf_sodium"));
@@ -99,9 +97,6 @@ public class FoodItem extends AppCompatActivity {
     }
 
     private int loadCalorieData(){
-
-//        DB.getData();
-
         SharedPreferences sharedPreferences = getSharedPreferences("FoodLabelCalories", MODE_PRIVATE);
         int cals = sharedPreferences.getInt("Calories", 0);
 //        System.out.println(cals);
