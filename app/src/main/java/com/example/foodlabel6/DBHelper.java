@@ -18,7 +18,7 @@ public class DBHelper  extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("create TABLE FoodItems(id serial primary key, upc text, name text, calories integer, sugar integer, sodium integer, protein integer)");
+        db.execSQL("create TABLE FoodItems(id serial primary key, upc text, name text, calories integer, sugar integer, sodium integer, protein integer, date_time datetime default current_timestamp)");
     }
 
     @Override
@@ -44,7 +44,7 @@ public class DBHelper  extends SQLiteOpenHelper {
         }
     }
 
-    public JSONObject getData() throws JSONException {
+    public JSONObject getSum() throws JSONException {
         SQLiteDatabase DB = this.getWritableDatabase();
         JSONObject ret = new JSONObject();
 
@@ -62,6 +62,12 @@ public class DBHelper  extends SQLiteOpenHelper {
         }else{
             System.out.println("Wasnt there");
         }
+        return ret;
+    }
+
+    public Cursor getFoodList() {
+        SQLiteDatabase DB = this.getWritableDatabase();
+        Cursor ret = DB.rawQuery("Select * from FoodItems", null);
         return ret;
     }
 

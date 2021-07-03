@@ -3,7 +3,6 @@ package com.example.foodlabel6;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
@@ -21,14 +20,14 @@ public class MainActivity extends AppCompatActivity {
     TextView Sodium;
     TextView Protein;
 
-//    Button startScan = (Button)findViewById(R.id.startScan);
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         Button startScan = (Button)findViewById(R.id.startScan);
+        Button foodList = (Button)findViewById(R.id.foodList);
+
         Calories = findViewById(R.id.calories);
         Sugar = findViewById(R.id.sugar);
         Sodium = findViewById(R.id.sodium);
@@ -40,12 +39,6 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-//        try {
-//            Calories.setText("Calories : " + Integer.toString(loadCalorieData()));
-//        } catch (JSONException e) {
-//            e.printStackTrace();
-//        }
-
         startScan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -54,28 +47,23 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        foodList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent myIntent = new Intent(getApplicationContext(), FoodList.class);
+                startActivity(myIntent);
+            }
+        });
+
     }
 
-
-    private int loadCalorieData() throws JSONException {
-
+    private void loadCalorieData() throws JSONException {
         DB = new DBHelper(this);
-        JSONObject res = DB.getData();
+        JSONObject res = DB.getSum();
 
-        Calories.setText(Integer.toString(res.getInt("calories")));
-        Sugar.setText(Integer.toString(res.getInt("sugar")));
-        Sodium.setText(Integer.toString(res.getInt("sodium")));
-        Protein.setText(Integer.toString(res.getInt("protein")));
-
-//        System.out.println(Integer.toString(res.getInt("calories")));
-//        System.out.println(res.get("sugar"));
-//        System.out.println(res.get("sodium"));
-//        System.out.println(res.get("protein"));
-
-        SharedPreferences sharedPreferences = getSharedPreferences("FoodLabelCalories", MODE_PRIVATE);
-        int cals = sharedPreferences.getInt("Calories", 0);
-//        System.out.println(cals);
-
-        return cals;
+        Calories.setText("Calories : " + Integer.toString(res.getInt("calories")));
+        Sugar.setText("Sugar : " + Integer.toString(res.getInt("sugar")) + "g");
+        Sodium.setText("Sodium : " + Integer.toString(res.getInt("sodium")) + "g");
+        Protein.setText("Protein : " + Integer.toString(res.getInt("protein")) + "g");
     }
 }

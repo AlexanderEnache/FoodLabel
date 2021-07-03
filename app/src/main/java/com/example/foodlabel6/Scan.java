@@ -27,9 +27,6 @@ public class Scan extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scan);
 
-        //        OkHttpClient client = new OkHttpClient();
-//        String url = "https://trackapi.nutritionix.com/v2/search/item?x-app-id=28dbe9b2&x-app-key=fabfe2466869329f5f532fcee0fb54fc&upc=071464240806";
-
         CodeScannerView scannerView = findViewById(R.id.scanner);
         mCodeScanner = new CodeScanner(this, scannerView);
 
@@ -37,19 +34,6 @@ public class Scan extends AppCompatActivity {
         myIntent.putExtra("upc", "048500202760");
         startActivity(myIntent);
 
-       /* mCodeScanner.setDecodeCallback(new DecodeCallback() {
-            @Override
-            public void onDecoded(@NonNull final Result result) {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        Intent myIntent = new Intent(getApplicationContext(), FoodItem.class);
-                        myIntent.putExtra("upc", result.getText());
-                        startActivity(myIntent);
-                    }
-                });
-            }
-        });*/
         mCodeScanner.setErrorCallback(error -> runOnUiThread(
                 () -> Toast.makeText(this, "String", Toast.LENGTH_LONG).show()));
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {

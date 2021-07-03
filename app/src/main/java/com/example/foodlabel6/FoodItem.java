@@ -38,7 +38,6 @@ public class FoodItem extends AppCompatActivity {
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                System.out.println("SSFSDSffefgrewf");
                 System.out.println(servings.getText());
                 getData(Integer.parseInt(servings.getText().toString()));
             }
@@ -68,12 +67,14 @@ public class FoodItem extends AppCompatActivity {
                         JSONObject wholeObject = new JSONObject(response.body().string());
                         JSONArray foods = wholeObject.getJSONArray("foods");
                         JSONObject foodsObj = foods.getJSONObject(0);
-                        int currentCalories = loadCalorieData();
+//                        String upc = foodsObj.getString("food_name");
+                        String name = "Food";
+//                        int totalCalories = loadCalorieData();
                         int currentFoodCalories = Integer.parseInt(foodsObj.getString("nf_calories"));
                         int currentFoodSugar = Integer.parseInt(foodsObj.getString("nf_sugars"));
                         int currentFoodSodium = Integer.parseInt(foodsObj.getString("nf_sodium"));
                         int currentFoodProtein = Integer.parseInt(foodsObj.getString("nf_protein"));
-                        saveData(currentCalories + currentFoodCalories);
+                        saveData(upc, name, currentFoodCalories, currentFoodSugar, currentFoodSodium, currentFoodProtein);
 
                         Intent myIntent = new Intent(getApplicationContext(), MainActivity.class);
                         startActivity(myIntent);
@@ -87,8 +88,8 @@ public class FoodItem extends AppCompatActivity {
         });
 
     }
-    private void saveData(int cal){
-        DB.insertFoodData("011212121","food", cal, 3, 3, 3);
+    private void saveData(String upc, String name, int cal, int sugar, int sodium, int protein){
+        DB.insertFoodData(upc, name, cal, sugar, sodium, protein);
 
         SharedPreferences sharedPreferences = getSharedPreferences("FoodLabelCalories", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();

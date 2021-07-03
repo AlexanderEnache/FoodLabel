@@ -41,18 +41,33 @@
             android:id="@+id/sugar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:fontFamily="@font/montserrat"
+            android:text="Sugar : 4000"
+            android:textSize="20dp"/>
         <TextView
             android:id="@+id/sodium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:fontFamily="@font/montserrat"
+            android:text="Sodium : 4000"
+            android:textSize="20dp"/>
         <TextView
             android:id="@+id/protein"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:fontFamily="@font/montserrat"
+            android:text="Protein : 4000"
+            android:textSize="20dp"/>
+        <Button
+            android:id="@+id/foodList"
+            android:layout_width="match_parent"
+            android:layout_height="75dp"
+            android:text="Scan Item"
+            app:layout_constraintBottom_toBottomOf="parent"
+            tools:ignore="MissingConstraints" />
     </LinearLayout>
+
+
 
     <Button
         android:id="@+id/startScan"
