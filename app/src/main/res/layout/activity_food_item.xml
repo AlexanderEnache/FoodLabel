@@ -4,14 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".FoodItem">
+    tools:context=".FoodItem"
+    android:paddingTop="10dp"
+    android:paddingRight="20dp"
+    android:paddingBottom="10dp"
+    android:paddingLeft="20dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        tools:layout_editor_absoluteX="195dp"
-        tools:layout_editor_absoluteY="324dp">
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/ask"
@@ -19,27 +21,23 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="How many servings will you be having ?"
-            tools:ignore="MissingConstraints"
-            tools:layout_editor_absoluteX="176dp"
-            tools:layout_editor_absoluteY="74dp" />
-
-        <EditText
-            android:id="@+id/servings"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="number"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.497"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:layout_editor_absoluteY="137dp"
+            android:paddingTop="25dp"
+            android:gravity="center"
+            android:textSize="20dp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/montserrat"
             tools:ignore="MissingConstraints" />
+
+        <NumberPicker
+            android:id="@+id/servings"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
         <Button
             android:id="@+id/submit"
             android:text="Submit"
             android:layout_width="match_parent"
-            android:layout_height="100dp"/>
+            android:layout_height="75dp"/>
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

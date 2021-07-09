@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.NumberPicker;
 
 import org.jetbrains.annotations.NotNull;
 import org.json.JSONArray;
@@ -31,22 +32,25 @@ public class FoodItem extends AppCompatActivity {
         setContentView(R.layout.activity_food_item);
 
         Button submit = findViewById(R.id.submit);
-        EditText servings = findViewById(R.id.servings);
+//        EditText servings = findViewById(R.id.servings);
+        NumberPicker servings = findViewById(R.id.servings);
+
+        servings.setMinValue(1);
+        servings.setMaxValue(12);
 
         DB = new DBHelper(this);
 
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                System.out.println(servings.getText());
-                getData(Integer.parseInt(servings.getText().toString()));
+                System.out.println(servings.getValue());
+                getData(servings.getValue());
             }
         });
 
     }
 
     public void getData(int serving){
-
         String upc = getIntent().getStringExtra("upc");
 
         OkHttpClient client = new OkHttpClient();
@@ -89,19 +93,19 @@ public class FoodItem extends AppCompatActivity {
     private void saveData(String upc, String name, int cal, int sugar, int sodium, int protein){
         DB.insertFoodData(upc, name, cal, sugar, sodium, protein);
 
-        SharedPreferences sharedPreferences = getSharedPreferences("FoodLabelCalories", MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-
-        editor.putInt("Calories", cal);
-        editor.apply();
+//        SharedPreferences sharedPreferences = getSharedPreferences("FoodLabelCalories", MODE_PRIVATE);
+//        SharedPreferences.Editor editor = sharedPreferences.edit();
+//
+//        editor.putInt("Calories", cal);
+//        editor.apply();
     }
 
-    private int loadCalorieData(){
-        SharedPreferences sharedPreferences = getSharedPreferences("FoodLabelCalories", MODE_PRIVATE);
-        int cals = sharedPreferences.getInt("Calories", 0);
+//    private void loadCalorieData(){
+//        SharedPreferences sharedPreferences = getSharedPreferences("FoodLabelCalories", MODE_PRIVATE);
+//        int cals = sharedPreferences.getInt("Calories", 0);
 //        System.out.println(cals);
 
-        return cals;
-    }
+//        return cals;
+//    }
 
 }

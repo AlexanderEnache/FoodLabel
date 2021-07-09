@@ -30,9 +30,9 @@ public class Scan extends AppCompatActivity {
         CodeScannerView scannerView = findViewById(R.id.scanner);
         mCodeScanner = new CodeScanner(this, scannerView);
 
-//        Intent myIntent = new Intent(getApplicationContext(), FoodItem.class);
-//        myIntent.putExtra("upc", "048500202760");
-//        startActivity(myIntent);
+        Intent myIntent = new Intent(getApplicationContext(), FoodItem.class);
+        myIntent.putExtra("upc", "048500202760");
+        startActivity(myIntent);
 
         mCodeScanner.setDecodeCallback(new DecodeCallback() {
             @Override

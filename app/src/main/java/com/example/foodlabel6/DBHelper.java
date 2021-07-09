@@ -27,6 +27,12 @@ public class DBHelper  extends SQLiteOpenHelper {
         db.execSQL("drop TABLE if exists FoodItems");
     }
 
+    public void delete() {
+        SQLiteDatabase DB = this.getWritableDatabase();
+        System.out.println("Delete DB");
+        DB.execSQL("DELETE from FoodItems");
+    }
+
     boolean insertFoodData(String upc, String name, int calories, int sugar, int sodium, int protein){
         SQLiteDatabase DB = this.getWritableDatabase();
         ContentValues row = new ContentValues();
