@@ -11,20 +11,21 @@ import org.json.JSONObject;
 
 import androidx.annotation.Nullable;
 
-public class DBHelper  extends SQLiteOpenHelper {
+public class DBHelper extends SQLiteOpenHelper {
     public DBHelper(@Nullable Context context) {
         super(context, "FoodItems", null, 1);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("create TABLE FoodItems(id serial primary key, upc text, name text, calories integer, sugar integer, sodium integer, protein integer, date_time datetime default current_timestamp)");
+        db.execSQL("create TABLE FoodItems(id integer primary key autoincrement, upc text, name text, calories integer, sugar integer, sodium integer, protein integer, date_time datetime default current_timestamp)");
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion)
     {
         db.execSQL("drop TABLE if exists FoodItems");
+        onCreate(db);
     }
 
     public void delete() {
@@ -33,7 +34,7 @@ public class DBHelper  extends SQLiteOpenHelper {
         DB.execSQL("DELETE from FoodItems");
     }
 
-    boolean insertFoodData(String upc, String name, int calories, int sugar, int sodium, int protein){
+    boolean insertItem(String upc, String name, int calories, int sugar, int sodium, int protein){
         SQLiteDatabase DB = this.getWritableDatabase();
         ContentValues row = new ContentValues();
         row.put("upc", upc);
@@ -48,6 +49,11 @@ public class DBHelper  extends SQLiteOpenHelper {
         }else{
             return true;
         }
+    }
+
+    void deleteItem(String id){
+        SQLiteDatabase DB = this.getWritableDatabase();
+        DB.execSQL("DELETE from FoodItems where id=" + id + ";");
     }
 
     public JSONObject getSum() throws JSONException {
@@ -74,6 +80,11 @@ public class DBHelper  extends SQLiteOpenHelper {
     public Cursor getFoodList() {
         SQLiteDatabase DB = this.getWritableDatabase();
         Cursor ret = DB.rawQuery("Select * from FoodItems", null);
+//        System.out.println("Here:");
+//        System.out.println(ret.toString());
+
+//        System.out.println(ret.getString(0) + " From DBHelper");
+
         return ret;
     }
 

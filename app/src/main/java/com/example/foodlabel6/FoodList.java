@@ -32,13 +32,9 @@ public class FoodList extends AppCompatActivity {
             ArrayList<String> foodList = new ArrayList<>();
 
             while(cur.moveToNext()) {
-//                foodList.add(cur.getString(0));
-                foodList.add(cur.getString(cur.getColumnIndex("name")));
-//                System.out.println(cur.getString(cur.getColumnIndex("upc")));
+                foodList.add((cur.getString(cur.getColumnIndex("name")) + ";" + cur.getString(cur.getColumnIndex("id"))));
             }
-            System.out.println(foodList.toString());
 
-//            ArrayAdapter arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, foodList);
             lv.setAdapter(new FoodListAdapter(this, R.layout.list_item_custom, foodList));
         }
 

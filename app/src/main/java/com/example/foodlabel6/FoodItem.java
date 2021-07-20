@@ -8,11 +8,9 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.NumberPicker;
 
 import org.jetbrains.annotations.NotNull;
@@ -44,13 +42,13 @@ public class FoodItem extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 System.out.println(servings.getValue());
-                getData(servings.getValue());
+                getApiData(servings.getValue());
             }
         });
 
     }
 
-    public void getData(int serving){
+    public void getApiData(int serving){
         String upc = getIntent().getStringExtra("upc");
 
         OkHttpClient client = new OkHttpClient();
@@ -91,7 +89,7 @@ public class FoodItem extends AppCompatActivity {
 
     }
     private void saveData(String upc, String name, int cal, int sugar, int sodium, int protein){
-        DB.insertFoodData(upc, name, cal, sugar, sodium, protein);
+        DB.insertItem(upc, name, cal, sugar, sodium, protein);
 
 //        SharedPreferences sharedPreferences = getSharedPreferences("FoodLabelCalories", MODE_PRIVATE);
 //        SharedPreferences.Editor editor = sharedPreferences.edit();
