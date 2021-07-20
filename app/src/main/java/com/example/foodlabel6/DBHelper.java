@@ -51,6 +51,24 @@ public class DBHelper extends SQLiteOpenHelper {
         }
     }
 
+    boolean insertItemWithID(String id, String upc, String name, int calories, int sugar, int sodium, int protein){
+        SQLiteDatabase DB = this.getWritableDatabase();
+        ContentValues row = new ContentValues();
+        row.put("id", id);
+        row.put("upc", upc);
+        row.put("name", name);
+        row.put("calories", calories);
+        row.put("sugar", sugar);
+        row.put("sodium", sodium);
+        row.put("protein", protein);
+
+        if(DB.insert("FoodItems", null, row) < 0){
+            return false;
+        }else{
+            return true;
+        }
+    }
+
     void deleteItem(String id){
         SQLiteDatabase DB = this.getWritableDatabase();
         DB.execSQL("DELETE from FoodItems where id=" + id + ";");
